@@ -1,0 +1,37 @@
+{
+  "name": "matiasiglesias/cbu-validator",
+  "description": "Módulo de Validación de CBU",
+  "type": "library",
+  "keywords": [
+    "cbu",
+    "zend framework",
+    "zf2",
+    "validator",
+    "argentina",
+    "clave bancaria uniforme"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/matiasiglesias/cbu-validator",
+  "support": {
+        "source": "https://github.com/matiasiglesias/cbu-validator",
+        "issues": "https://github.com/matiasiglesias/cbu-validator/issues"
+    },
+  "authors": [
+    {
+      "name": "Matias Iglesias",
+      "email": "matiasiglesias@matiasiglesias.com.ar",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "zendframework/zend-stdlib": "^2.4 || ^3.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "CBUValidator": "src/"
+    },
+    "classmap": [
+      "./Module.php"
+    ]
+  }
+}

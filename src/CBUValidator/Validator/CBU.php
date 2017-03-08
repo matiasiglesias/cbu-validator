@@ -25,6 +25,11 @@ use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 
+/**
+ * Class CBU
+ * @package CBUValidator\Validator
+ * @author Matias Iglesias <matiasiglesias@meridiem.com.ar>
+ */
 class CBU extends AbstractValidator
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -42,7 +47,31 @@ class CBU extends AbstractValidator
      *
      * @var array
      */
-    protected $options = array();
+    protected $options = [
+        'filterNumeric' => true,
+    ];
+
+    /**
+     * Returns the filterNumeric option
+     *
+     * @return bool
+     */
+    public function getFilterNumeric()
+    {
+        return $this->options['filterNumeric'];
+    }
+
+    /**
+     * Sets the filterNumeric option
+     *
+     * @param  bool $filter
+     * @return CBU Provides a fluent interface
+     */
+    public function setFilterNumeric($filter)
+    {
+        $this->options['filterNumeric'] = $filter;
+        return $this;
+    }
 
     /**
      * Sets validator options
@@ -59,9 +88,17 @@ class CBU extends AbstractValidator
         parent::__construct($options);
     }
 
+    /**
+     * @param mixed $value
+     * @return bool
+     */
     public function isValid($value)
     {
         $this->setValue($value);
+
+        if ($this->getFilterNumeric()) {
+            $value = preg_replace("/[\-|\ |\.]/", "", $value);
+        }
 
         if (!is_numeric($value)) {
             $this->error(self::MSG_NUMERIC);
@@ -73,54 +110,40 @@ class CBU extends AbstractValidator
             return false;
         }
 
-        $bloque_1 = substr($value, 0, 8);
-        $bloque_2 = substr($value, 8, 14);
+        /** @var array $arr */
+        $arr = str_split($value);
 
-        //Verificacion del Primer Bloque
-        $banco = substr($bloque_1, 0, 3);
-        $b1 = (int) substr($banco, 0, 1);
-        $b2 = (int) substr($banco, 1, 1);
-        $b3 = (int) substr($banco, 2, 1);
-        $digitoVerificador1 = (int) substr($bloque_1, 3, 1);
-        $sucursal = substr($bloque_1, 4, 3);
-        $s1 = (int) substr($sucursal, 0, 1);
-        $s2 = (int) substr($sucursal, 1, 1);
-        $s3 = (int) substr($sucursal, 2, 1);
-        $digitoVerificador2 = (int) substr($bloque_1, 7, 1);
-
-        $suma1 = $b1 * 7 + $b2 * 1 + $b3 * 3 + $digitoVerificador1 * 9 + $s1 * 7 + $s2 * 1 + $s3 * 3;
-        $diferencia1 = 10 - (int) substr($suma1, -1);
-
-        if ($diferencia1 != $digitoVerificador2) {
+        if ($arr[7] <> self::getDigitoVerificador($arr, 0, 6)) {
             $this->error(self::MSG_INVALID);
             return false;
         }
 
-        //Verificacion del Segundo Bloque
-        $cuenta = substr($bloque_2, 0, 13);
-        $digitoVerificador = substr($bloque_2, 13, 1);
-        $c1 = (int) substr($cuenta, 0, 1);
-        $c2 = (int) substr($cuenta, 1, 1);
-        $c3 = (int) substr($cuenta, 2, 1);
-        $c4 = (int) substr($cuenta, 3, 1);
-        $c5 = (int) substr($cuenta, 4, 1);
-        $c6 = (int) substr($cuenta, 5, 1);
-        $c7 = (int) substr($cuenta, 6, 1);
-        $c8 = (int) substr($cuenta, 7, 1);
-        $c9 = (int) substr($cuenta, 8, 1);
-        $c10 = (int) substr($cuenta, 9, 1);
-        $c11 = (int) substr($cuenta, 10, 1);
-        $c12 = (int) substr($cuenta, 11, 1);
-        $c13 = (int) substr($cuenta, 12, 1);
-
-        $suma2 = $c1 * 3 + $c2 * 9 + $c3 * 7 + $c4 * 1 + $c5 * 3 + $c6 * 9 + $c7 * 7 + $c8 * 1 + $c9 * 3 + $c10 * 9
-            + $c11 * 7 + $c12 * 1 + $c13 * 3;
-        $diferencia2 = 10 - (int) substr($suma2, -1);
-        if ($diferencia2 != $digitoVerificador) {
+        if ($arr[21] <> self::getDigitoVerificador($arr, 8, 20)) {
             $this->error(self::MSG_INVALID);
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Devuelve el dígito verificador para los dígitos de las posiciones "pos_inicial" a "pos_final"
+     * de la cadena "$numero" usando clave 10 con ponderador 9713
+     *
+     * @param array $numero arreglo de digitos
+     * @param integer $pos_inicial
+     * @param integer $pos_final
+     * @return integer digito verificador de la cadena $numero
+     */
+    private static function getDigitoVerificador($numero, $pos_inicial, $pos_final)
+    {
+        $ponderador = array(3,1,7,9);
+        $suma = 0;
+        $j = 0;
+        for ($i = $pos_final; $i >= $pos_inicial; $i--) {
+            $suma = $suma + ($numero[$i] * $ponderador[$j % 4]);
+            $j++;
+        }
+        return (10 - $suma % 10) % 10;
     }
 }

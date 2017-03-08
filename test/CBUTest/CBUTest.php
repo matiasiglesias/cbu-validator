@@ -32,4 +32,39 @@ class CBUTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->validator->isValid(null));
     }
+
+    public function testCBUValido()
+    {
+        $this->assertTrue($this->validator->isValid("28503965 40094708965758"));
+        $this->assertTrue($this->validator->isValid("28503965  40094708965758"));
+        $this->assertTrue($this->validator->isValid("28503965-40094708965758"));
+        $this->assertTrue($this->validator->isValid("28503965.40094708965758"));
+        $this->assertTrue($this->validator->isValid("2850396540094708965758"));
+    }
+
+    public function testCBUInvalido()
+    {
+        $this->assertFalse($this->validator->isValid("28503965X40094708965758"));
+    }
+
+    public function testCBUPrimerDigitoVerificadorInvalido()
+    {
+        $this->assertFalse($this->validator->isValid("2850396440094708965758"));
+    }
+
+    public function testCBUSegundoDigitoVerificadorInvalido()
+    {
+        $this->assertFalse($this->validator->isValid("2850396540094708965759"));
+    }
+
+    public function testCBUCorto()
+    {
+        $this->assertFalse($this->validator->isValid("285039654009470896575"));
+    }
+
+    public function testCBULargo()
+    {
+        var_dump($this->validator->isValid("28503965400947089657581"));
+    }
+
 }

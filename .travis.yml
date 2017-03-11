@@ -12,18 +12,16 @@ install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
 
 script:
-  - (cd tests ; phpunit -c phpunit.xml)
-
-after_script:
-  - php vendor/bin/coveralls -v
+  - (cd tests ; ../vendor/bin/phpunit -c phpunit.xml)
 
 matrix:
   fast_finish: true
   include:
-    - php: 5.5
     - php: 5.6
     - php: 7
+    - php: 7.1
     - php: hhvm
   allow_failures:
-    - php: hhvm
     - php: 7
+    - php: 7.1
+    - php: hhvm

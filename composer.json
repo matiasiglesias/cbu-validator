@@ -24,7 +24,8 @@
     }
   ],
   "require": {
-    "zendframework/zend-stdlib": "^2.4 || ^3.0"
+    "zendframework/zend-stdlib": "^2.4 || ^3.0",
+    "zendframework/zend-validator": "^2.4"
   },
   "autoload": {
     "psr-0": {

@@ -2,6 +2,13 @@ Módulo Validador de CBU para ZF2
 ================================
 
 [![Build Status](https://travis-ci.org/matiasiglesias/cbu-validator.svg?branch=master)](https://travis-ci.org/matiasiglesias/cbu-validator)
+[![Latest Stable Version](https://poser.pugx.org/matiasiglesias/cbu-validator/version)](https://packagist.org/packages/matiasiglesias/cbu-validator)
+[![Latest Unstable Version](https://poser.pugx.org/matiasiglesias/cbu-validator/v/unstable)](//packagist.org/packages/matiasiglesias/cbu-validator)
+[![Total Downloads](https://poser.pugx.org/matiasiglesias/cbu-validator/downloads)](https://packagist.org/packages/matiasiglesias/cbu-validator)
+[![License](https://poser.pugx.org/matiasiglesias/cbu-validator/license)](https://packagist.org/packages/matiasiglesias/cbu-validator)
+[![composer.lock available](https://poser.pugx.org/matiasiglesias/cbu-validator/composerlock)](https://packagist.org/packages/matiasiglesias/cbu-validator)
+[![Dependency Status](https://www.versioneye.com/user/projects/58c40f07c920cf0040c4d2d8/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58c40f07c920cf0040c4d2d8)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/366dab8c-b03b-457b-b7c2-02a5c32b1673/mini.png)](https://insight.sensiolabs.com/projects/366dab8c-b03b-457b-b7c2-02a5c32b1673)
 
 
 #Introducción
@@ -13,9 +20,9 @@ Más información en [Wikipedia](https://es.wikipedia.org/wiki/Clave_Bancaria_Un
 
 
 
-##Instalacion
+##Instalación
 
-Instala el modulo con composer agregando el siguiente require "require" en el archivo `composer.json`
+Instala el módulo con composer agregando el siguiente require "require" en el archivo `composer.json`
 
 ```json
 {

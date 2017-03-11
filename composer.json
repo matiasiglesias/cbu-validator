@@ -23,6 +23,8 @@
       "role": "Developer"
     }
   ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "zendframework/zend-stdlib": "^2.4 || ^3.0",
     "zendframework/zend-validator": "^2.4"

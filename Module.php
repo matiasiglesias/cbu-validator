@@ -15,7 +15,6 @@ class Module implements
     AutoloaderProviderInterface,
     ConfigProviderInterface,
     ValidatorProviderInterface
-
 {
     /**
      * @return mixed

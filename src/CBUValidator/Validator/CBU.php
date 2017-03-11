@@ -34,11 +34,11 @@ class CBU extends AbstractValidator
     const MSG_INVALID = 'MsgInvalid';
     const MSG_INVALID_LENGTH = 'MsgInvalidLength';
 
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::MSG_NUMERIC => "'%value%' no es numerico",
         self::MSG_INVALID => "'%value%' no es un CBU valido",
         self::MSG_INVALID_LENGTH => "El CBU debe tener 22 digitos",
-    );
+    ];
 
     /**
      * Options for the between validator
@@ -68,6 +68,7 @@ class CBU extends AbstractValidator
     public function setFilterNumeric($filter)
     {
         $this->options['filterNumeric'] = $filter;
+
         return $this;
     }
 
@@ -77,7 +78,7 @@ class CBU extends AbstractValidator
      *
      * @param  array|Traversable $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -100,24 +101,28 @@ class CBU extends AbstractValidator
 
         if (!is_numeric($value)) {
             $this->error(self::MSG_NUMERIC);
+
             return false;
         }
 
         if (strlen($value) != 22) {
             $this->error(self::MSG_INVALID_LENGTH);
+
             return false;
         }
 
         /** @var array $arr */
         $arr = str_split($value);
 
-        if ($arr[7] <> self::getDigitoVerificador($arr, 0, 6)) {
+        if ($arr[7] != self::getDigitoVerificador($arr, 0, 6)) {
             $this->error(self::MSG_INVALID);
+
             return false;
         }
 
-        if ($arr[21] <> self::getDigitoVerificador($arr, 8, 20)) {
+        if ($arr[21] != self::getDigitoVerificador($arr, 8, 20)) {
             $this->error(self::MSG_INVALID);
+
             return false;
         }
 
@@ -135,13 +140,14 @@ class CBU extends AbstractValidator
      */
     private static function getDigitoVerificador($numero, $pos_inicial, $pos_final)
     {
-        $ponderador = array(3,1,7,9);
+        $ponderador = [3, 1, 7, 9];
         $suma = 0;
         $j = 0;
         for ($i = $pos_final; $i >= $pos_inicial; $i--) {
             $suma = $suma + ($numero[$i] * $ponderador[$j % 4]);
             $j++;
         }
+
         return (10 - $suma % 10) % 10;
     }
 }

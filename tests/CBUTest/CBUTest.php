@@ -11,7 +11,6 @@
 namespace CBUValidator\Validator;
 
 use PHPUnit_Framework_TestCase;
-use CBUValidator\Validator\CBU;
 
 class CBUTest extends PHPUnit_Framework_TestCase
 {

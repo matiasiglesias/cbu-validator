@@ -9,7 +9,8 @@ Módulo Validador de CBU para ZF2
 [![composer.lock available](https://poser.pugx.org/matiasiglesias/cbu-validator/composerlock)](https://packagist.org/packages/matiasiglesias/cbu-validator)
 [![Dependency Status](https://www.versioneye.com/user/projects/58c40f07c920cf0040c4d2d8/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58c40f07c920cf0040c4d2d8)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/366dab8c-b03b-457b-b7c2-02a5c32b1673/mini.png)](https://insight.sensiolabs.com/projects/366dab8c-b03b-457b-b7c2-02a5c32b1673)
-
+[![PHP_Eye](http://php-eye.com/badge/matiasiglesias/cbu-validator/tested.svg)](https://packagist.org/packages/matiasiglesias/cbu-validator)
+[![PHP_Eye](http://php-eye.com/badge/matiasiglesias/cbu-validator/partial.svg)](https://packagist.org/packages/matiasiglesias/cbu-validator)
 
 #Introducción
 

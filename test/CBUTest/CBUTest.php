@@ -64,7 +64,6 @@ class CBUTest extends PHPUnit_Framework_TestCase
 
     public function testCBULargo()
     {
-        var_dump($this->validator->isValid("28503965400947089657581"));
+        $this->validator->isValid("28503965400947089657581");
     }
-
 }

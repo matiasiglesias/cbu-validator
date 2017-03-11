@@ -1,8 +1,17 @@
 Módulo Validador de CBU para ZF2
 ================================
-Validador de Clave Bancaria Uniforme
-utilizada en Argentina
+
+[![Build Status](https://travis-ci.org/matiasiglesias/cbu-validator.svg?branch=master)](https://travis-ci.org/matiasiglesias/cbu-validator)
+
+
+#Introducción
+
+Módulo Validador de Clave Bancaria Uniforme
+utilizada en Argentina.
+
 Más información en [Wikipedia](https://es.wikipedia.org/wiki/Clave_Bancaria_Uniforme)
+
+
 
 ##Instalacion
 

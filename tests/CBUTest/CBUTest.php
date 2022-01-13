@@ -68,6 +68,6 @@ class CBUTest extends PHPUnit_Framework_TestCase
 
     public function testCBUConCeros()
     {
-        $this->assertFalse($this->validador->isValid("000000000000000000000000"));
+        $this->assertFalse($this->validator->isValid("000000000000000000000000"));
     }
 }

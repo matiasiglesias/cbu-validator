@@ -63,7 +63,7 @@ class CBUTest extends PHPUnit_Framework_TestCase
 
     public function testCBULargo()
     {
-        $this->assertTrue($this->validator->isValid("28503965400947089657581"));
+        $this->assertFalse($this->validator->isValid("28503965400947089657581"));
     }
 
     public function testCBUConCeros()

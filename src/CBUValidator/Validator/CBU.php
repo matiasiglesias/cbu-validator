@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright (c) 2013-2017 Matias Iglesias <matiasiglesias@matiasiglesias.com.ar>.
+ * Copyright (c) 2013-2022 Matias Iglesias <matiasiglesias@matiasiglesias.com.ar>.
  *
  *
  * Redistribution and use in source and binary forms are permitted
@@ -107,6 +108,12 @@ class CBU extends AbstractValidator
 
         if (strlen($value) != 22) {
             $this->error(self::MSG_INVALID_LENGTH);
+
+            return false;
+        }
+
+        if ($value === "000000000000000000000000") {
+            $this->error(self::MSG_INVALID);
 
             return false;
         }

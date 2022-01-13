@@ -112,7 +112,7 @@ class CBU extends AbstractValidator
             return false;
         }
 
-        if ($value === "000000000000000000000000") {
+        if ($value == "000000000000000000000000") {
             $this->error(self::MSG_INVALID);
 
             return false;

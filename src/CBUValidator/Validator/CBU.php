@@ -34,11 +34,22 @@ class CBU extends AbstractValidator
     const MSG_NUMERIC = 'msgNumeric';
     const MSG_INVALID = 'MsgInvalid';
     const MSG_INVALID_LENGTH = 'MsgInvalidLength';
+    const MSG_CVU_NOT_ALLOWED = 'MsgCvuNotAllowed';
+
+    /**
+     * Código de entidad reservado para las CVU (Claves Virtuales Uniformes).
+     * Las CVU usan el mismo algoritmo de dígitos verificadores que los CBU,
+     * así que sólo se distinguen por este prefijo.
+     */
+    const ENTIDAD_CVU = '000';
 
     protected $messageTemplates = [
         self::MSG_NUMERIC => "'%value%' no es numerico",
         self::MSG_INVALID => "'%value%' no es un CBU valido",
         self::MSG_INVALID_LENGTH => "El CBU debe tener 22 digitos",
+        // Sin %value%: el valor puede mostrarse enmascarado en pantalla y el
+        // mensaje de error no debe revelarlo en texto claro.
+        self::MSG_CVU_NOT_ALLOWED => "El valor ingresado es una CVU (clave virtual), no un CBU bancario",
     ];
 
     /**
@@ -48,6 +59,7 @@ class CBU extends AbstractValidator
      */
     protected $options = [
         'filterNumeric' => true,
+        'allowCvu' => false,
     ];
 
     /**
@@ -69,6 +81,29 @@ class CBU extends AbstractValidator
     public function setFilterNumeric($filter)
     {
         $this->options['filterNumeric'] = $filter;
+
+        return $this;
+    }
+
+    /**
+     * Returns the allowCvu option
+     *
+     * @return bool
+     */
+    public function getAllowCvu()
+    {
+        return $this->options['allowCvu'];
+    }
+
+    /**
+     * Sets the allowCvu option
+     *
+     * @param  bool $allow
+     * @return CBU Provides a fluent interface
+     */
+    public function setAllowCvu($allow)
+    {
+        $this->options['allowCvu'] = $allow;
 
         return $this;
     }
@@ -114,6 +149,12 @@ class CBU extends AbstractValidator
 
         if ($value == "000000000000000000000000") {
             $this->error(self::MSG_INVALID);
+
+            return false;
+        }
+
+        if (!$this->getAllowCvu() && substr($value, 0, 3) === self::ENTIDAD_CVU) {
+            $this->error(self::MSG_CVU_NOT_ALLOWED);
 
             return false;
         }

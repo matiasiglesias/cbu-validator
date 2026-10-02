@@ -82,6 +82,7 @@ Agrega el validador
 Estas son las opciones del validador:
 
 * **filterNumeric** Boolean. Filtra cualquier caracter no numérico del CBU (ej. '-'). Valor por defecto *true*.
+* **allowCvu** Boolean. Acepta también CVU (Claves Virtuales Uniformes, código de entidad `000`, usadas por billeteras virtuales como Mercado Pago). Las CVU usan el mismo algoritmo de dígitos verificadores que los CBU, pero no son cuentas bancarias: por defecto el validador las rechaza con un mensaje propio, pensando en casos de uso como débitos bancarios donde una cuenta virtual no sirve. Valor por defecto *false*.
 
 
 ## Contacto

@@ -70,4 +70,43 @@ class CBUTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->validator->isValid("000000000000000000000000"));
     }
+
+    public function testAllowCvuEsFalsePorDefecto()
+    {
+        $this->assertFalse($this->validator->getAllowCvu());
+    }
+
+    public function testCVURechazadaPorDefecto()
+    {
+        $this->assertFalse($this->validator->isValid("0000003112345678901233"));
+        $messages = $this->validator->getMessages();
+        $this->assertArrayHasKey(CBU::MSG_CVU_NOT_ALLOWED, $messages);
+        // El mensaje no debe revelar el valor: en pantallas que lo enmascaran
+        // sería filtrarlo en texto claro.
+        $this->assertNotContains("0000003112345678901233", current($messages));
+    }
+
+    public function testCVUAceptadaConOverridePorConstructor()
+    {
+        $validator = new CBU(['allowCvu' => true]);
+        $this->assertTrue($validator->isValid("0000003112345678901233"));
+    }
+
+    public function testCVUAceptadaConSetter()
+    {
+        $this->validator->setAllowCvu(true);
+        $this->assertTrue($this->validator->isValid("0000003198765432109877"));
+    }
+
+    public function testCVUConDigitoVerificadorInvalidoRechazadaAunquePermitida()
+    {
+        $validator = new CBU(['allowCvu' => true]);
+        $this->assertFalse($validator->isValid("0000003112345678901234"));
+    }
+
+    public function testCBUBancarioSigueValidoConCvuPermitida()
+    {
+        $validator = new CBU(['allowCvu' => true]);
+        $this->assertTrue($validator->isValid("2850396540094708965758"));
+    }
 }

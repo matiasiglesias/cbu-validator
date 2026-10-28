@@ -1,7 +1,6 @@
-Módulo Validador de CBU para ZF2
-================================
+Módulo Validador de CBU para Laminas
+====================================
 
-[![Build Status](https://travis-ci.org/matiasiglesias/cbu-validator.svg?branch=master)](https://travis-ci.org/matiasiglesias/cbu-validator)
 [![Latest Stable Version](https://poser.pugx.org/matiasiglesias/cbu-validator/version)](https://packagist.org/packages/matiasiglesias/cbu-validator)
 [![Latest Unstable Version](https://poser.pugx.org/matiasiglesias/cbu-validator/v/unstable)](//packagist.org/packages/matiasiglesias/cbu-validator)
 [![Total Downloads](https://poser.pugx.org/matiasiglesias/cbu-validator/downloads)](https://packagist.org/packages/matiasiglesias/cbu-validator)
@@ -12,7 +11,7 @@ Módulo Validador de CBU para ZF2
 [![PHP_Eye](http://php-eye.com/badge/matiasiglesias/cbu-validator/tested.svg)](https://packagist.org/packages/matiasiglesias/cbu-validator)
 [![PHP_Eye](http://php-eye.com/badge/matiasiglesias/cbu-validator/partial.svg)](https://packagist.org/packages/matiasiglesias/cbu-validator)
 
-#Introducción
+# Introducción
 
 Módulo Validador de Clave Bancaria Uniforme
 utilizada en Argentina.
@@ -21,17 +20,19 @@ Más información en [Wikipedia](https://es.wikipedia.org/wiki/Clave_Bancaria_Un
 
 
 
-##Instalación
+## Instalación
 
 Instala el módulo con composer agregando el siguiente require "require" en el archivo `composer.json`
 
 ```json
 {
 	"require": {
-		"matiasiglesias/cbu-validator": "1.*"
+		"matiasiglesias/cbu-validator": "^2.0"
 	}
 }
 ```
+
+La 2.x corre sobre PHP 8.1+ y `laminas/laminas-validator` 2.x (Laminas MVC 3). La 1.x es la de Zend Framework 2 y PHP 5.6 a 7.
 
 luego, ejecuta
 

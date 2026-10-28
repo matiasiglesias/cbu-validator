@@ -10,14 +10,14 @@
 
 namespace CBUValidator\Validator;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class CBUTest extends PHPUnit_Framework_TestCase
+class CBUTest extends TestCase
 {
     /** @var  CBU */
     protected $validator;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->validator = new CBU();
     }
@@ -83,7 +83,7 @@ class CBUTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(CBU::MSG_CVU_NOT_ALLOWED, $messages);
         // El mensaje no debe revelar el valor: en pantallas que lo enmascaran
         // sería filtrarlo en texto claro.
-        $this->assertNotContains("0000003112345678901233", current($messages));
+        $this->assertStringNotContainsString("0000003112345678901233", current($messages));
     }
 
     public function testCVUAceptadaConOverridePorConstructor()

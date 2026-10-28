@@ -21,8 +21,8 @@
 namespace CBUValidator\Validator;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\AbstractValidator;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Validator\AbstractValidator;
 
 /**
  * Class CBU
@@ -132,7 +132,7 @@ class CBU extends AbstractValidator
         $this->setValue($value);
 
         if ($this->getFilterNumeric()) {
-            $value = preg_replace("/[\-|\ |\.]/", "", $value);
+            $value = preg_replace("/[\-|\ |\.]/", "", (string) $value);
         }
 
         if (!is_numeric($value)) {
